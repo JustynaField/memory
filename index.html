@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Mamory Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Memory Game</h1>
+    <h1>Memory</h1>
+
+    <main>
+      <!-- 1st page form -->
+      <div class="form hidden">
+        <div class="container">
+          <div class="row cards-row">
+
+          </div>
+        </div>
+      </div>
+
+<!-- Game Rules -->
+      <div class="game-rules hidden">
+        <h3>Welcome</h3>
+        <p>The goal of the game is to find all pairs of cards as quickly as possible. The player that finds the greatest number of pairs wins.</p>
+        <p>To begin playing, the player whose name is highlighted can click any card in the card pile.
+          It will flip over and reveal a picture of a travel destination.
+          Click another card. If they match, they will disappear and you will have completed a match!
+          If they don't, you'll have three seconds to look at them before they flip back over.
+          Then it's time for the other player to try!
+        </p>
+        <p>After you play, you'll see the name of the final winner and how long it took to win the game.</p>
+        <button>Play Game</button>
+      </div>
+
+<!-- Game Board -->
+      <div class="board">
+      </div>
+
+
+    </main>
   </body>
 </html>
+
+<script type="text/javascript" src="./src/main.js"></script>

@@ -1,0 +1,26 @@
+h1 {
+  text-align: center;
+}
+
+main {
+  height: 800px;
+  background-image: url('./assets/background.jpg');
+  background-position: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.cards-row {
+  height: 300px;
+}
+
+.card {
+  height: 250px;
+  margin: 20px;
+}
+
+.card-back {
+  height: 100%;
+}
