@@ -12,15 +12,11 @@ main {
   display: none;
 }
 
-.cards-row {
-  height: 300px;
-}
-
 .card {
   height: 250px;
   margin: 20px;
 }
 
-.card-back {
+.card-front, .card-back {
   height: 100%;
 }
