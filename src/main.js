@@ -1,18 +1,40 @@
 var board = document.querySelector('.board');
 
-// 
-// var deck = new Deck;
-//
-// console.log(deck.cards);
+
+
+var deck = new Deck;
+
+// matchInfo - holds the same value as the card that matches it
+function instantiateCards () {
+  var matchInfo = 0;
+
+  for (var i=1; i<13; i++) {
+      matchInfo ++;
+
+      var card = new Card (matchInfo, i)
+
+      console.log("Card:", card);
+
+    if (i == 7) {
+      matchInfo = 1;
+    }
+    deck.cards.push(matchInfo)
+
+    console.log('matched Cards: ', deck.cards);
+  }
+
+}
+
+
+instantiateCards ();
+
 
 function layOutCards () {
   var rowOne = document.querySelector('.row1');
   var rowTwo = document.querySelector('.row2');
   var rowThree = document.querySelector('.row3');
 
-  var cards = [1, 2, 3, 4, 5, 6];
-
-  cards.forEach((item, i) => {
+  deck.cards.forEach((item, i) => {
 
     var boardHtml = `
     <div class="col-sm-2 card">
