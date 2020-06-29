@@ -5,28 +5,23 @@ var board = document.querySelector('.board');
 var deck = new Deck;
 
 // matchInfo - holds the same value as the card that matches it
-function instantiateCards () {
+function instantiateDeck () {
   var matchInfo = 0;
 
   for (var i=1; i<13; i++) {
       matchInfo ++;
 
-      var card = new Card (matchInfo, i)
-
-      console.log("Card:", card);
-
-    if (i == 7) {
+    if (matchInfo === 7) {
       matchInfo = 1;
     }
-    deck.cards.push(matchInfo)
 
-    console.log('matched Cards: ', deck.cards);
+    var card = new Card (matchInfo, i)
+    deck.cards.push(card);
   }
-
 }
 
+instantiateDeck ();
 
-instantiateCards ();
 
 
 function layOutCards () {
@@ -34,11 +29,12 @@ function layOutCards () {
   var rowTwo = document.querySelector('.row2');
   var rowThree = document.querySelector('.row3');
 
-  deck.cards.forEach((item, i) => {
+
+  deck.cards.forEach((card, i) => {
 
     var boardHtml = `
     <div class="col-sm-2 card">
-    <img src="./assets/travel${item}.jpg" alt="Card Opened" class="card-front">
+    <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front">
     <img src="./assets/back.jpg" alt="Card Closed" class="card-back hidden">
     </div>
     `
