@@ -32,9 +32,8 @@ function shuffleDeck (deck) {
     }
     return deck;
 }
+
 shuffleDeck(deck.cards);
-
-
 
 function layOutCards () {
   var rowOne = document.querySelector('.row1');
@@ -46,8 +45,8 @@ function layOutCards () {
 
     var boardHtml = `
     <div class="col-sm-2 card">
-    <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front">
-    <img src="./assets/back.jpg" alt="Card Closed" class="card-back hidden">
+    <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front hidden">
+    <img src="./assets/back.jpg" alt="Card Closed" class="card-back">
     </div>
     `
 
@@ -63,3 +62,22 @@ function layOutCards () {
 }
 
 layOutCards();
+
+
+board.addEventListener('click', flipCard);
+
+function flipCard (e) {
+  var selectedCard = e.target.closest('.card');
+  var cardFront = selectedCard.querySelector('.card-front');
+  var cardBack = selectedCard.querySelector('.card-back');
+
+  if (cardFront.classList.contains('hidden')) {
+
+    cardFront.classList.remove('hidden');
+    cardBack.classList.add('hidden');
+  }
+
+}
+
+
+//interpolation vs. concatination
