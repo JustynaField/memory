@@ -1,8 +1,8 @@
 var board = document.querySelector('.board');
+var flippedCard = false;
 
 
-
-var deck = new Deck;
+var deck = new Deck();
 
 // matchInfo - holds the same value as the card that matches it
 function instantiateDeck () {
@@ -22,15 +22,15 @@ function instantiateDeck () {
 
 instantiateDeck ();
 
-function shuffleDeck (deck) {
+function shuffleDeck (temp) {
     var j, x, i;
-    for (i = deck.length - 1; i > 0; i--) {
+    for (i = temp.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
-        x = deck[i];
-        deck[i] = deck[j];
-        deck[j] = x;
+        x = temp[i];
+        temp[i] = temp[j];
+        temp[j] = x;
     }
-    return deck;
+    return temp;
 }
 
 shuffleDeck(deck.cards);
@@ -64,20 +64,64 @@ function layOutCards () {
 layOutCards();
 
 
-board.addEventListener('click', flipCard);
+board.addEventListener('click', cardRules);
 
-function flipCard (e) {
+function cardRules (e) {
   var selectedCard = e.target.closest('.card');
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
 
-  if (cardFront.classList.contains('hidden')) {
+  selectTwoCards(selectedCard, cardFront, cardBack);
 
-    cardFront.classList.remove('hidden');
-    cardBack.classList.add('hidden');
-  }
 
 }
+
+
+function selectTwoCards (selected, front, back) {
+  // var counter = 0;
+  deck.selectedCards.push(selected);
+
+  openCard (front, back);
+
+  if (deck.selectedCards.length === 2) {
+    compareCards();
+    setTimeout(() => { closeCards() }, 2000);
+  }
+
+
+
+}
+
+
+console.log("Selected cards", deck.selectedCards);
+
+
+function compareCards () {
+  console.log("2 Cards to compare");
+}
+
+
+function openCard (front, back) {
+  if (front.classList.contains('hidden')) {
+    front.classList.remove('hidden');
+    back.classList.add('hidden');
+    flippedCard = true;
+  }
+}
+
+
+function closeCards () {
+  deck.selectedCards.forEach((card, i) => {
+    if (card.querySelector('.card-back').classList.contains('hidden')) {
+      card.querySelector('.card-back').classList.remove('hidden');
+      card.querySelector('.card-front').classList.add('hidden');
+    }
+  });
+  deck.selectedCards = [];
+}
+
+
+
 
 
 //interpolation vs. concatination
