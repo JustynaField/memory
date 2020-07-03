@@ -64,23 +64,21 @@ function layOutCards () {
 layOutCards();
 
 
-board.addEventListener('click', cardRules);
+board.addEventListener('click', playCards);
 
-function cardRules (e) {
+function playCards (e) {
   var selectedCard = e.target.closest('.card');
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
 
-  selectTwoCards(selectedCard, cardFront, cardBack);
+  selectCards(selectedCard, cardFront, cardBack);
 
 
 }
 
 
-function selectTwoCards (selected, front, back) {
-  // var counter = 0;
+function selectCards (selected, front, back) {
   deck.selectedCards.push(selected);
-
   openCard (front, back);
 
   if (deck.selectedCards.length === 2) {
@@ -97,7 +95,16 @@ console.log("Selected cards", deck.selectedCards);
 
 
 function compareCards () {
-  console.log("2 Cards to compare");
+  var cardOne = deck.selectedCards[0].querySelector('.card-front');
+  var cardTwo = deck.selectedCards[1].querySelector('.card-front');
+
+
+  if (cardOneImg.getAttribute('src') == cardTwoImg.getAttribute('src')) {
+
+    console.log("Were having a match!!");
+
+  }
+
 }
 
 
