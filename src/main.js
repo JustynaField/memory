@@ -1,8 +1,9 @@
 var board = document.querySelector('.board');
 var flippedCard = false;
 
-
 var deck = new Deck();
+
+
 
 // matchInfo - holds the same value as the card that matches it
 function instantiateDeck () {
@@ -17,25 +18,31 @@ function instantiateDeck () {
 
     var card = new Card (matchInfo, i)
     deck.cards.push(card);
+
+
   }
 }
 
 instantiateDeck ();
 
-function shuffleDeck (temp) {
-    var j, x, i;
-    for (i = temp.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = temp[i];
-        temp[i] = temp[j];
-        temp[j] = x;
-    }
-    return temp;
-}
+// function shuffleDeck (temp) {
+//     var j, x, i;
+//     for (i = temp.length - 1; i > 0; i--) {
+//         j = Math.floor(Math.random() * (i + 1));
+//         x = temp[i];
+//         temp[i] = temp[j];
+//         temp[j] = x;
+//     }
+//     return temp;
+// }
 
-shuffleDeck(deck.cards);
+// shuffle(deck.cards);
 
 function layOutCards () {
+
+  deck.shuffle(deck.cards);
+  console.log('Shuffled', deck.cards);
+
   var rowOne = document.querySelector('.row1');
   var rowTwo = document.querySelector('.row2');
   var rowThree = document.querySelector('.row3');
@@ -95,8 +102,8 @@ console.log("Selected cards", deck.selectedCards);
 
 
 function compareCards () {
-  var cardOne = deck.selectedCards[0].querySelector('.card-front');
-  var cardTwo = deck.selectedCards[1].querySelector('.card-front');
+  var cardOneImg = deck.selectedCards[0].querySelector('.card-front');
+  var cardTwoImg = deck.selectedCards[1].querySelector('.card-front');
 
 
   if (cardOneImg.getAttribute('src') == cardTwoImg.getAttribute('src')) {
