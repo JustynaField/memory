@@ -1,12 +1,15 @@
 var board = document.querySelector('.board');
-var flippedCard = false;
 
 var deck = new Deck();
 
 
+layOutCards();
+
+board.addEventListener('click', playCards);
+
 
 // matchInfo - holds the same value as the card that matches it
-function instantiateDeck () {
+function defineCard () {
   var matchInfo = 0;
 
   for (var i=1; i<13; i++) {
@@ -18,30 +21,14 @@ function instantiateDeck () {
 
     var card = new Card (matchInfo, i)
     deck.cards.push(card);
-
-
   }
 }
 
-instantiateDeck ();
-
-// function shuffleDeck (temp) {
-//     var j, x, i;
-//     for (i = temp.length - 1; i > 0; i--) {
-//         j = Math.floor(Math.random() * (i + 1));
-//         x = temp[i];
-//         temp[i] = temp[j];
-//         temp[j] = x;
-//     }
-//     return temp;
-// }
-
-// shuffle(deck.cards);
-
 function layOutCards () {
 
+  defineCard ();
   deck.shuffle(deck.cards);
-  console.log('Shuffled', deck.cards);
+
 
   var rowOne = document.querySelector('.row1');
   var rowTwo = document.querySelector('.row2');
@@ -68,10 +55,7 @@ function layOutCards () {
   })
 }
 
-layOutCards();
 
-
-board.addEventListener('click', playCards);
 
 function playCards (e) {
   var selectedCard = e.target.closest('.card');
@@ -79,27 +63,26 @@ function playCards (e) {
   var cardBack = selectedCard.querySelector('.card-back');
 
   selectCards(selectedCard, cardFront, cardBack);
-
-
 }
 
 
 function selectCards (selected, front, back) {
-  deck.selectedCards.push(selected);
-  openCard (front, back);
+
+
+  if (deck.selectedCards.length < 2) {
+    openCard (selected, front, back);
+  }
+
 
   if (deck.selectedCards.length === 2) {
     compareCards();
     setTimeout(() => { closeCards() }, 2000);
+
   }
 
 
 
 }
-
-
-console.log("Selected cards", deck.selectedCards);
-
 
 function compareCards () {
   var cardOneImg = deck.selectedCards[0].querySelector('.card-front');
@@ -108,6 +91,8 @@ function compareCards () {
 
   if (cardOneImg.getAttribute('src') == cardTwoImg.getAttribute('src')) {
 
+
+
     console.log("Were having a match!!");
 
   }
@@ -115,12 +100,15 @@ function compareCards () {
 }
 
 
-function openCard (front, back) {
+
+
+function openCard (selected, front, back) {
   if (front.classList.contains('hidden')) {
     front.classList.remove('hidden');
     back.classList.add('hidden');
-    flippedCard = true;
+    deck.selectedCards.push(selected);
   }
+console.log("Selected 1:", deck.selectedCards);
 }
 
 
@@ -132,7 +120,10 @@ function closeCards () {
     }
   });
   deck.selectedCards = [];
+      console.log('Selected 2: ', deck.selectedCards);
 }
+
+
 
 
 

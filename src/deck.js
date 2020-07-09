@@ -6,7 +6,6 @@ class Deck {
     this.matches = [];
   }
 
-
   shuffle(array) {
     var j, x, i;
     for (i = array.length - 1; i > 0; i--) {
