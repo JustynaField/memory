@@ -38,7 +38,7 @@ function layOutCards () {
   deck.cards.forEach((card, i) => {
 
     var boardHtml = `
-    <div class="col-sm-2 card">
+    <div class="col-sm-2 card" id="${card.matchInfo}">
     <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front hidden">
     <img src="./assets/back.jpg" alt="Card Closed" class="card-back">
     </div>
@@ -46,8 +46,7 @@ function layOutCards () {
 
     if (i < 4) {
       rowOne.innerHTML += boardHtml;
-    }
-    else if (i < 8) {
+    } else if (i < 8) {
       rowTwo.innerHTML += boardHtml;
     } else {
       rowThree.innerHTML += boardHtml;
@@ -75,25 +74,8 @@ function selectCards (selected, front, back) {
 
 
   if (deck.selectedCards.length === 2) {
-    compareCards();
+    deck.compareSelectedCards();
     setTimeout(() => { closeCards() }, 2000);
-
-  }
-
-
-
-}
-
-function compareCards () {
-  var cardOneImg = deck.selectedCards[0].querySelector('.card-front');
-  var cardTwoImg = deck.selectedCards[1].querySelector('.card-front');
-
-
-  if (cardOneImg.getAttribute('src') == cardTwoImg.getAttribute('src')) {
-
-
-
-    console.log("Were having a match!!");
 
   }
 

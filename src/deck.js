@@ -17,7 +17,14 @@ class Deck {
     return array;
   }
 
+  compareSelectedCards () {
+    if (this.selectedCards[0].id === this.selectedCards[1].id) {
+      this.matchedCards.push(this.selectedCards);
 
+      console.log("MatchedCards:" , this.matchedCards);
+    }
+
+  }
 
 
 
