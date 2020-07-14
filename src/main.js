@@ -1,12 +1,37 @@
+var playerOne = document.getElementById('player-one');
+var playerTwo = document.getElementById('player-two');
+var playGame = document.getElementById('play-game');
+var playerOneOutput = document.getElementById('player-one-output');
+var playerTwoOutput = document.getElementById('player-two-output');
+var startGame = document.getElementById('start-game');
+var firstPage = document.querySelector('.first-page');
+var secondPage = document.querySelector('.second-page');
 var board = document.querySelector('.board');
+
 
 var deck = new Deck();
 
-
 layOutCards();
 
+playGame.addEventListener('click', fillOutForm);
 board.addEventListener('click', playCards);
+startGame.addEventListener('click', showBoard);
 
+
+function fillOutForm (e) {
+  e.preventDefault();
+
+  firstPage.classList.add('hidden');
+  secondPage.classList.remove('hidden');
+
+  playerOneOutput.innerText = playerOne.value;
+  playerTwoOutput.innerText = playerTwo.value;
+}
+
+function showBoard () {
+  secondPage.classList.add('hidden');
+  board.classList.remove('hidden');
+}
 
 // matchInfo - holds the same value as the card that matches it
 function defineCard () {
