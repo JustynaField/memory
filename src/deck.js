@@ -19,13 +19,11 @@ class Deck {
 
   compareSelectedCards () {
     if (this.selectedCards[0].id === this.selectedCards[1].id) {
-      this.matchedCards.push(this.selectedCards);
 
-      console.log("MatchedCards:" , this.matchedCards);
+      this.selectedCards.forEach((card, i) => {
+        this.matchedCards.push(card);
+      })
     }
-
   }
-
-
 
 }
