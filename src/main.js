@@ -29,7 +29,6 @@ function layOutCards () {
   defineCard ();
   deck.shuffle(deck.cards);
 
-
   var rowOne = document.querySelector('.row1');
   var rowTwo = document.querySelector('.row2');
   var rowThree = document.querySelector('.row3');
@@ -38,10 +37,10 @@ function layOutCards () {
   deck.cards.forEach((card, i) => {
 
     var boardHtml = `
-    <div class="col-sm-2 card" id="${card.matchInfo}">
-    <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front hidden">
-    <img src="./assets/back.jpg" alt="Card Closed" class="card-back">
-    </div>
+      <div class="col-sm-2 card" id="${card.matchInfo}">
+      <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front hidden">
+      <img src="./assets/back.jpg" alt="Card Closed" class="card-back">
+      </div>
     `
 
     if (i < 4) {
@@ -57,15 +56,18 @@ function layOutCards () {
 
 
 function playCards (e) {
+  var selectedCardId = e.target.parentNode.id
+
+
   var selectedCard = e.target.closest('.card');
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
 
-  selectCards(selectedCard, cardFront, cardBack);
+  selectCards(selectedCardId, selectedCard, cardFront, cardBack);
 }
 
 
-function selectCards (selected, front, back) {
+function selectCards (card, selected, front, back) {
 
 
   if (deck.selectedCards.length < 2) {
@@ -74,12 +76,17 @@ function selectCards (selected, front, back) {
 
 
   if (deck.selectedCards.length === 2) {
-    deck.compareSelectedCards();
-    setTimeout(() => { closeCards() }, 2000);
+    if (deck.selectedCards[0].id === deck.selectedCards[1].id) {
+      deck.compareSelectedCards(card);
+    }
+
+
+    setTimeout(() => { closeCards() }, 1000);
 
   }
 
 }
+console.log(deck.matchedCards);
 
 
 
@@ -90,7 +97,7 @@ function openCard (selected, front, back) {
     back.classList.add('hidden');
     deck.selectedCards.push(selected);
   }
-console.log("Selected 1:", deck.selectedCards);
+// console.log("Selected 1:", deck.selectedCards);
 }
 
 
@@ -102,7 +109,7 @@ function closeCards () {
     }
   });
   deck.selectedCards = [];
-      console.log('Selected 2: ', deck.selectedCards);
+      // console.log('Selected 2: ', deck.selectedCards);
 }
 
 

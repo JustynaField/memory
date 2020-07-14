@@ -17,13 +17,21 @@ class Deck {
     return array;
   }
 
-  compareSelectedCards () {
+  compareSelectedCards (cardId) {
     if (this.selectedCards[0].id === this.selectedCards[1].id) {
 
-      this.selectedCards.forEach((card, i) => {
-        this.matchedCards.push(card);
+      this.cards.forEach((card, i) => {
+
+        if (card.matchInfo == cardId) {
+          this.matchedCards.push(card);
+          card.match();
+        }
       })
+      console.log('Deck', this.cards);
+      console.log('Selected', this.selectedCards);
+      console.log('Matched', this.matchedCards);
     }
   }
+
 
 }
