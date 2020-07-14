@@ -33,7 +33,6 @@ function layOutCards () {
   var rowTwo = document.querySelector('.row2');
   var rowThree = document.querySelector('.row3');
 
-
   deck.cards.forEach((card, i) => {
 
     var boardHtml = `
@@ -54,11 +53,8 @@ function layOutCards () {
 }
 
 
-
 function playCards (e) {
   var selectedCardId = e.target.parentNode.id
-
-
   var selectedCard = e.target.closest('.card');
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
@@ -69,27 +65,17 @@ function playCards (e) {
 
 function selectCards (card, selected, front, back) {
 
-
   if (deck.selectedCards.length < 2) {
     openCard (selected, front, back);
   }
 
-
   if (deck.selectedCards.length === 2) {
-    if (deck.selectedCards[0].id === deck.selectedCards[1].id) {
-      deck.compareSelectedCards(card);
+    if (deck.selectedCards[0].id != deck.selectedCards[1].id) {
+      setTimeout(() => { closeCards() }, 1000);
     }
-
-
-    setTimeout(() => { closeCards() }, 1000);
-
+    deck.compareSelectedCards(card);
   }
-
 }
-console.log(deck.matchedCards);
-
-
-
 
 function openCard (selected, front, back) {
   if (front.classList.contains('hidden')) {
@@ -97,9 +83,7 @@ function openCard (selected, front, back) {
     back.classList.add('hidden');
     deck.selectedCards.push(selected);
   }
-// console.log("Selected 1:", deck.selectedCards);
 }
-
 
 function closeCards () {
   deck.selectedCards.forEach((card, i) => {
@@ -109,13 +93,4 @@ function closeCards () {
     }
   });
   deck.selectedCards = [];
-      // console.log('Selected 2: ', deck.selectedCards);
 }
-
-
-
-
-
-
-
-//interpolation vs. concatination
