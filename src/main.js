@@ -7,8 +7,13 @@ var startGame = document.querySelector('.start-game');
 var firstPage = document.querySelector('.first-page');
 var secondPage = document.querySelector('.second-page');
 var boardPage = document.querySelector('.board-page');
+var player1output = document.getElementById('player1');
+var player2output = document.getElementById('player2');
+
 var board = document.querySelector('.board');
 
+var playerOneMatches = document.getElementById('player-one-matches');
+var playerTwoMatches = document.getElementById('player-two-matches');
 
 var deck = new Deck();
 
@@ -19,12 +24,12 @@ startGame.addEventListener('click', showBoard);
 
 board.addEventListener('click', playCards);
 
+
 function fillOutForm (e) {
   e.preventDefault();
 
   firstPage.classList.add('hidden');
   secondPage.classList.remove('hidden');
-
   playerOneOutput.innerText = playerOne.value;
   playerTwoOutput.innerText = playerTwo.value;
 }
@@ -32,13 +37,9 @@ function fillOutForm (e) {
 function showBoard () {
   secondPage.classList.add('hidden');
   boardPage.classList.remove('hidden');
-  playerOneOutput.innerText = playerOne.value;
-  playerTwoOutput.innerText = playerTwo.value;
-
+  player1output.innerText = playerOne.value;
+  player2output.innerText = playerTwo.value;
 }
-
-
-
 
 
 
@@ -94,7 +95,6 @@ function playCards (e) {
 
   selectCards(selectedCardId, selectedCard, cardFront, cardBack);
 }
-
 
 function selectCards (card, selected, front, back) {
 
