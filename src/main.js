@@ -1,11 +1,12 @@
 var playerOne = document.getElementById('player-one');
 var playerTwo = document.getElementById('player-two');
-var playGame = document.getElementById('play-game');
-var playerOneOutput = document.getElementById('player-one-output');
-var playerTwoOutput = document.getElementById('player-two-output');
-var startGame = document.getElementById('start-game');
+var playGame = document.querySelector('.play-game');
+var playerOneOutput = document.querySelector('.player-one-output');
+var playerTwoOutput = document.querySelector('.player-two-output');
+var startGame = document.querySelector('.start-game');
 var firstPage = document.querySelector('.first-page');
 var secondPage = document.querySelector('.second-page');
+var boardPage = document.querySelector('.board-page');
 var board = document.querySelector('.board');
 
 
@@ -14,9 +15,9 @@ var deck = new Deck();
 layOutCards();
 
 playGame.addEventListener('click', fillOutForm);
-board.addEventListener('click', playCards);
 startGame.addEventListener('click', showBoard);
 
+board.addEventListener('click', playCards);
 
 function fillOutForm (e) {
   e.preventDefault();
@@ -30,8 +31,16 @@ function fillOutForm (e) {
 
 function showBoard () {
   secondPage.classList.add('hidden');
-  board.classList.remove('hidden');
+  boardPage.classList.remove('hidden');
+  playerOneOutput.innerText = playerOne.value;
+  playerTwoOutput.innerText = playerTwo.value;
+
 }
+
+
+
+
+
 
 // matchInfo - holds the same value as the card that matches it
 function defineCard () {
@@ -61,7 +70,7 @@ function layOutCards () {
   deck.cards.forEach((card, i) => {
 
     var boardHtml = `
-      <div class="col-sm-2 card" id="${card.matchInfo}">
+      <div class="col-sm-3 card" id="${card.matchInfo}">
       <img src="./assets/travel${card.matchInfo}.jpg" alt="Card Opened" class="card-front hidden">
       <img src="./assets/back.jpg" alt="Card Closed" class="card-back">
       </div>
@@ -76,7 +85,6 @@ function layOutCards () {
     }
   })
 }
-
 
 function playCards (e) {
   var selectedCardId = e.target.parentNode.id

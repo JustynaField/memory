@@ -7,27 +7,33 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Memory</h1>
+    <h1>Memory Game</h1>
+    <main class="container">
 
-    <main>
-      <!-- 1st page form -->
+      <!-- Form -->
       <div class="first-page">
         <div class="container">
-          <form class="">
+          <form>
             <div class="row">
-              <input type="text" id="player-one">
-              <input type="text" id="player-two">
+              <div class="form-group">
+                <label for="player-one">Player 1</label>
+                <input type="text" class="form-control" id="player-one">
+              </div>
+              <div class="form-group">
+                <label for="player-two">Player 2</label>
+                <input type="text" class="form-control" id="player-two">
+              </div>
             </div>
             <div class="row">
-              <button id="play-game">Play Game</button>
+              <button class="play-game btn btn-info">Play Game</button>
             </div>
           </form>
         </div>
       </div>
 
-<!-- Game Rules -->
-      <div class="second-page hidden">
-        <h3>Welcome <span id="player-one-output"></span> and <span id="player-two-output"></span> !</h3>
+      <!-- Game Rules -->
+      <div class="second-page center hidden">
+        <h3>Welcome <span class="player-one-output"></span> and <span class="player-two-output"></span> !</h3>
         <p>The goal of the game is to find all pairs of cards as quickly as possible. The player that finds the greatest number of pairs wins.</p>
         <p>To begin playing, the player whose name is highlighted can click any card in the card pile.
           It will flip over and reveal a picture of a travel destination.
@@ -36,19 +42,49 @@
           Then it's time for the other player to try!
         </p>
         <p>After you play, you'll see the name of the final winner and how long it took to win the game.</p>
-        <button id="start-game">Play Game</button>
+        <button class="start-game btn btn-info">Play Game</button>
       </div>
 
-<!-- Game Board -->
-      <div class="board hidden">
-        <div class="row row1">
-        </div>
-        <div class="row row2">
-        </div>
-        <div class="row row3">
-        </div>
-      </div>
+      <!-- Game Board -->
+      <div class="board-page hidden">
 
+        <div class="row">
+
+          <div class="side col-md-2">
+            <div class="container">
+              <p class="player-one-output"></p>
+              <hr>
+              <p>Matches this round</p>
+              <p>5</p>
+              <hr>
+              <p>Game Wins</p>
+            </div>
+          </div>
+
+
+        <div class="board col-md-8">
+          <div class="row row1">
+          </div>
+          <div class="row row2">
+          </div>
+          <div class="row row3">
+          </div>
+        </div>
+
+        <div class="side col-md-2">
+          <div class="container">
+            <p class="player-two-output"></p>
+            <hr>
+            <p>Matches this round</p>
+            <p>5</p>
+            <hr>
+            <p>Game Wins</p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
 
     </main>
   </body>
