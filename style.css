@@ -55,7 +55,7 @@ body {
 }
 
 .side {
-  padding: 40px 0;
+  padding: 40px 15px;
 }
 
 .side p {
@@ -72,4 +72,12 @@ body {
 
 .card-front, .card-back {
   height: 100%;
+}
+
+.player-name {
+  margin: 5px;
+}
+
+.underline {
+  border-bottom: 2px solid black;
 }

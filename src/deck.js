@@ -3,6 +3,8 @@ class Deck {
     this.cards = [];
     this.selectedCards = [];
     this.matchedCards = [];
+    this.turn = '';
+    this.turnCounter = 0;
     this.matches = [];
   }
 
@@ -28,6 +30,19 @@ class Deck {
       })
 
       this.selectedCards = [];
+    }
+  }
+
+  defineTurns (player1, player2) {
+
+    if (this.turnCounter < 2) {
+      this.turn = player1;
+    } else if (this.turnCounter < 4)  {
+      this.turn = player2;
+    }
+    else {
+      this.turnCounter = 0;
+      this.defineTurns (player1, player2)
     }
   }
 

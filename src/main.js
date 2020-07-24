@@ -7,13 +7,18 @@ var startGame = document.querySelector('.start-game');
 var firstPage = document.querySelector('.first-page');
 var secondPage = document.querySelector('.second-page');
 var boardPage = document.querySelector('.board-page');
-var player1output = document.getElementById('player1');
-var player2output = document.getElementById('player2');
+var player1 = document.getElementById('player1');
+var player2 = document.getElementById('player2');
 
 var board = document.querySelector('.board');
+var counter = 0;
+
+
 
 var playerOneMatches = document.getElementById('player-one-matches');
 var playerTwoMatches = document.getElementById('player-two-matches');
+
+
 
 var deck = new Deck();
 
@@ -23,6 +28,7 @@ playGame.addEventListener('click', fillOutForm);
 startGame.addEventListener('click', showBoard);
 
 board.addEventListener('click', playCards);
+
 
 
 function fillOutForm (e) {
@@ -37,10 +43,9 @@ function fillOutForm (e) {
 function showBoard () {
   secondPage.classList.add('hidden');
   boardPage.classList.remove('hidden');
-  player1output.innerText = playerOne.value;
-  player2output.innerText = playerTwo.value;
+  player1.innerText = playerOne.value;
+  player2.innerText = playerTwo.value;
 }
-
 
 
 // matchInfo - holds the same value as the card that matches it
@@ -93,10 +98,14 @@ function playCards (e) {
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
 
+  deck.defineTurns (playerOne.value, playerTwo.value);
+  markPlayers ();
   selectCards(selectedCardId, selectedCard, cardFront, cardBack);
 }
 
 function selectCards (card, selected, front, back) {
+
+    console.log(deck.turn);
 
   if (deck.selectedCards.length < 2) {
     openCard (selected, front, back);
@@ -108,6 +117,19 @@ function selectCards (card, selected, front, back) {
     }
     deck.compareSelectedCards(card);
   }
+
+}
+
+
+//mark who's turn
+function markPlayers () {
+  if (deck.turn == playerOne.value) {
+    player1.classList.add('underline');
+    player2.classList.remove('underline');
+  } else {
+    player1.classList.remove('underline');
+    player2.classList.add('underline');
+  }
 }
 
 function openCard (selected, front, back) {
@@ -115,8 +137,10 @@ function openCard (selected, front, back) {
     front.classList.remove('hidden');
     back.classList.add('hidden');
     deck.selectedCards.push(selected);
+    deck.turnCounter ++;
   }
 }
+
 
 function closeCards () {
   deck.selectedCards.forEach((card, i) => {
