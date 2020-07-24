@@ -13,12 +13,12 @@ var player2 = document.getElementById('player2');
 var board = document.querySelector('.board');
 var counter = 0;
 
-
-
+var playerOneScore = 0;
+var playerTwoScore = 0;
 var playerOneMatches = document.getElementById('player-one-matches');
 var playerTwoMatches = document.getElementById('player-two-matches');
-
-
+var playerOneWin = document.querySelector('.player-one-win');
+var playerTwoWin = document.querySelector('.player-two-win');
 
 var deck = new Deck();
 
@@ -28,8 +28,6 @@ playGame.addEventListener('click', fillOutForm);
 startGame.addEventListener('click', showBoard);
 
 board.addEventListener('click', playCards);
-
-
 
 function fillOutForm (e) {
   e.preventDefault();
@@ -45,6 +43,9 @@ function showBoard () {
   boardPage.classList.remove('hidden');
   player1.innerText = playerOne.value;
   player2.innerText = playerTwo.value;
+
+  playerOneMatches.innerText = playerOneScore;
+  playerTwoMatches.innerText = playerTwoScore;
 }
 
 
@@ -89,8 +90,11 @@ function layOutCards () {
     } else {
       rowThree.innerHTML += boardHtml;
     }
-  })
+  });
+  deck.defineTurns (playerOne.value, playerTwo.value);
+  markPlayers ();
 }
+
 
 function playCards (e) {
   var selectedCardId = e.target.parentNode.id
@@ -98,14 +102,10 @@ function playCards (e) {
   var cardFront = selectedCard.querySelector('.card-front');
   var cardBack = selectedCard.querySelector('.card-back');
 
-  deck.defineTurns (playerOne.value, playerTwo.value);
-  markPlayers ();
   selectCards(selectedCardId, selectedCard, cardFront, cardBack);
 }
 
 function selectCards (card, selected, front, back) {
-
-    console.log(deck.turn);
 
   if (deck.selectedCards.length < 2) {
     openCard (selected, front, back);
@@ -115,20 +115,19 @@ function selectCards (card, selected, front, back) {
     if (deck.selectedCards[0].id != deck.selectedCards[1].id) {
       setTimeout(() => { closeCards() }, 1000);
     }
+    else {
+      if (deck.turn == playerOne.value) {
+        playerOneScore ++;
+        playerOneMatches.innerText = playerOneScore;
+      } else if (deck.turn == playerTwo.value) {
+        playerTwoScore ++;
+        playerTwoMatches.innerText = playerTwoScore;
+      }
+    }
     deck.compareSelectedCards(card);
-  }
-
-}
-
-
-//mark who's turn
-function markPlayers () {
-  if (deck.turn == playerOne.value) {
-    player1.classList.add('underline');
-    player2.classList.remove('underline');
-  } else {
-    player1.classList.remove('underline');
-    player2.classList.add('underline');
+    deck.defineTurns (playerOne.value, playerTwo.value);
+    markPlayers ();
+    defineWin();
   }
 }
 
@@ -141,7 +140,6 @@ function openCard (selected, front, back) {
   }
 }
 
-
 function closeCards () {
   deck.selectedCards.forEach((card, i) => {
     if (card.querySelector('.card-back').classList.contains('hidden')) {
@@ -150,4 +148,28 @@ function closeCards () {
     }
   });
   deck.selectedCards = [];
+}
+
+function markPlayers () {
+  if (deck.turn == playerOne.value) {
+    player1.classList.add('underline');
+    player2.classList.remove('underline');
+  } else {
+    player1.classList.remove('underline');
+    player2.classList.add('underline');
+  }
+}
+
+function defineWin () {
+  if (deck.matches == 6) {
+    if (playerOneScore > playerTwoScore) {
+      playerOneWin.classList.add('underline');
+      alert(playerOne.value + ' wins!');
+    } else if (playerTwoScore > playerOneScore) {
+      playerTwoWin.classList.add('underline');
+      alert(playerTwo.value + ' wins!');
+    } else {
+      alert("It's a tie!");
+    }
+  }
 }

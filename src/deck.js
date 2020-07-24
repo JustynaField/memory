@@ -5,7 +5,7 @@ class Deck {
     this.matchedCards = [];
     this.turn = '';
     this.turnCounter = 0;
-    this.matches = [];
+    this.matches = 0;
   }
 
   shuffle(array) {
@@ -28,7 +28,7 @@ class Deck {
           card.match();
         }
       })
-
+      this.matches ++;
       this.selectedCards = [];
     }
   }
@@ -45,5 +45,4 @@ class Deck {
       this.defineTurns (player1, player2)
     }
   }
-
 }

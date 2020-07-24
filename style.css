@@ -81,3 +81,8 @@ body {
 .underline {
   border-bottom: 2px solid black;
 }
+
+.bold {
+  font-style: bold !important;
+  font-weight: 20px !important;
+}
